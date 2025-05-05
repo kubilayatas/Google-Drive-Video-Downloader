@@ -36,34 +36,29 @@ Bu proje, Google Drive videolarının oynatılması sırasında ağdan gelen vid
 
 ```bash
 git clone https://github.com/kullaniciadi/drive-video-downloader.git
-cd drive-video-downloader
+cd drive-video-downloader```
 
-2. Gereksinimleri yükle
-bash
-Kopyala
-Düzenle
-pip install -r requirements.txt
+### 2. Gereksinimleri yükle
+```bash
+pip install -r requirements.txt```
 Eğer requirements.txt yoksa manuel olarak şunları yükleyin:
 
-bash
-Kopyala
-Düzenle
-pip install selenium selenium-wire undetected-chromedriver pandas
-3. ffmpeg'i indir ve PATH'e ekle
+```bash
+pip install selenium selenium-wire undetected-chromedriver pandas```
+### 3. ffmpeg'i indir ve PATH'e ekle
 https://ffmpeg.org/download.html
 
 ffmpeg.exe’yi indir, örneğin C:\ffmpeg\bin klasörüne çıkar
 
 Ortam değişkenlerine (PATH) bu klasörü ekle
 
-⚙️ Kullanım
-1. CSV Dosyasını Oluştur
-Google Drive video bağlantılarını içeren linkleri işler, meta verilerini çıkarır:
+## ⚙️ Kullanım
+### 1. video_links.py Dosyasını Oluştur
+Google Drive video bağlantılarını içeren linkleri içeren bir py dosyası oluştur
+sonrasında csv_generate.py scriptini çalıştır ve tüm indirilebilir bağlatıları bir csv dosyasına kaydet
 
-bash
-Kopyala
-Düzenle
-python csv_generate.py
+```bash
+python csv_generate.py```
 Bu adım:
 
 Videoları sırayla açar
@@ -72,16 +67,14 @@ Oynatmayı tetikler
 
 Ağdan alınan ses ve video parçalarını listeler
 
-Bilgileri videos.csv dosyasına yazar
+Bilgileri media_links.csv dosyasına yazar
 
 2. Videoları İndir ve Birleştir
-bash
-Kopyala
-Düzenle
-python download_videos.py
+```bash
+python download_videos.py```
 Bu adım:
 
-videos.csv dosyasını okur
+media_links.csv dosyasını okur
 
 Her bir bağlantıya ait parçaları indirir
 
@@ -89,10 +82,8 @@ Parçaları ffmpeg ile birleştirir
 
 output/ klasörüne .mp4 olarak kaydeder
 
-📁 Dosya Yapısı
-bash
-Kopyala
-Düzenle
+## 📁 Dosya Yapısı
+```bash
 drive-video-downloader/
 │
 ├── csv_generate.py         # Linkleri işler, parçaları analiz eder
@@ -101,22 +92,21 @@ drive-video-downloader/
 ├── chunks/                 # Geçici video/ses parçaları
 ├── output/                 # Nihai .mp4 dosyaları
 └── README.md               # Bu dosya
-🛠️ Sorun Giderme
+```
+## 🛠️ Sorun Giderme
 ❌ Chrome açılmıyor veya bağlantı sağlanamıyor
 Bilgisayarında açık olan tüm Chrome/Chromedriver işlemlerini kapat
 
 Aşağıdaki komutla undetected-chromedriver’ı güncelle:
 
-bash
-Kopyala
-Düzenle
-pip install -U undetected-chromedriver
+```bash
+pip install -U undetected-chromedriver```
 ❌ FFmpeg bulunamadı hatası
 Komut satırında ffmpeg yazdığında çalışıyor olmalı
 
 Windows için: C:\ffmpeg\bin klasörünü sistem PATH'ine eklemeyi unutma
 
-🤝 Katkıda Bulun
+## 🤝 Katkıda Bulun
 Katkı yapmak için:
 
 Bu repoyu forklayın 🍴
@@ -127,8 +117,8 @@ Geliştirmelerinizi yapıp commitleyin
 
 Pull Request gönderin
 
-📝 Lisans
+## 📝 Lisans
 Bu proje MIT lisansı ile lisanslanmıştır. Dilediğiniz gibi kullanabilir, geliştirebilir ve paylaşabilirsiniz.
 
-📫 İletişim
+## 📫 İletişim
 Herhangi bir hata veya öneri için GitHub Issues kısmından ulaşabilirsiniz.
