@@ -1,4 +1,6 @@
 undetected-chromedriver>=3.5.5
 selenium>=4.15.2
+selenium-wire
 tqdm>=4.66.1
 requests>=2.31.0
+blinker==1.6.2
