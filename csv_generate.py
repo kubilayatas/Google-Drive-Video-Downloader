@@ -218,9 +218,17 @@ def birlestir_ses_goruntu(video_path, audio_path, output_path):
 
 
 # === ANA FONKSİYONUN GÜNCELLENMİŞ HALİ ===
-def restart_driver(driver):
-    driver.quit()
-    return setup_driver()  # start_driver() senin mevcut başlatma fonksiyonunsa
+def restart_driver(driver=None):
+    if driver:
+        try:
+            driver.quit()
+        except:
+            pass
+    os.system("taskkill /f /im chromedriver.exe")
+    os.system("taskkill /f /im chrome.exe")
+    time.sleep(2)
+    return setup_driver()
+
 
 def append_to_csv(data):
     file_exists = os.path.exists(OUTPUT_CSV)
@@ -262,6 +270,9 @@ def main():
     rows = []
     for idx, url in enumerate(VIDEO_LINKS, 1):
         print(f"\n[{idx}/{len(VIDEO_LINKS)}] İşleniyor: {url}")
+        if (idx - 1) % 15 == 0:
+            print("🧹 Cookie'ler siliniyor...")
+            driver.delete_all_cookies()
         driver = restart_driver(driver)
         time.sleep(1)
         driver.get(url)
