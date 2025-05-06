@@ -12,7 +12,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-from video_link_list import VIDEO_LINKS_Part01 as VIDEO_LINKS
+from video_link_list import VIDEO_LINKS_Part33 as VIDEO_LINKS
 # === AYARLAR ===
 #VIDEO_LINKS = [
 #    "https://drive.google.com/file/d/1eUiQwGdoh_vHDjhQsZPfnuHMldSEDwgR/view"
@@ -119,7 +119,7 @@ def setup_driver():
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--ignore-ssl-errors')
     options.add_argument(f"--user-data-dir={os.path.abspath(PROFILE_DIR)}")
-    #options.add_argument("--disable-gpu")
+    options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     #options.add_argument("--autoplay-policy=no-user-gesture-required")
@@ -187,7 +187,7 @@ def get_itag_from_url(url):
     match = re.search(r"itag=(\d+)", url)
     return int(match.group(1)) if match else None
 
-def wait_for_media_requests(driver, timeout=50):
+"""def wait_for_media_requests(driver, timeout=50):
     print("⏳ Medya akışları aranıyor (video ve ses)...")
     start_time = time.time()
     headers, cookies = None, None
@@ -201,11 +201,11 @@ def wait_for_media_requests(driver, timeout=50):
             itag = get_itag_from_url(request.url)
             if not itag:
                 continue
-            if itag in ITAG_QUALITY_PRIORITY:
-                if "video" in request.response.headers.get("Content-Type", ""):
-                    video_candidates.append((itag, request))
-                elif "audio" in request.response.headers.get("Content-Type", ""):
-                    audio_candidates.append((itag, request))
+            if request.response and "video" in request.response.headers.get("Content-Type", ""):
+                video_candidates.append((itag, request))
+            elif request.response and "audio" in request.response.headers.get("Content-Type", ""):
+                audio_candidates.append((itag, request))
+
         
         if video_candidates and audio_candidates:
             break
@@ -213,11 +213,59 @@ def wait_for_media_requests(driver, timeout=50):
 
     if not video_candidates or not audio_candidates:
         print("❌ Yeterli medya akışı bulunamadı.")
-        return None, None, None, None
+        return None, None, None, None"""
+def wait_for_media_requests(driver, timeout=50):
+    print("⏳ Medya akışları aranıyor (video ve ses)...")
+    start_time = time.time()
+    video_url, audio_url = None, None
+    headers, cookies = None, None
 
-    # En kaliteli video ve sesi seç
-    best_video = min(video_candidates, key=lambda x: ITAG_QUALITY_PRIORITY.get(x[0], 999))
-    best_audio = min(audio_candidates, key=lambda x: ITAG_QUALITY_PRIORITY.get(x[0], 999))
+    while time.time() - start_time < timeout:
+        for request in driver.requests:
+            if not request.response or "videoplayback" not in request.url:
+                continue
+            if "itag=313" in request.url and not video_url:
+                video_url = request.url
+            elif "itag=271" in request.url and not video_url:
+                video_url = request.url
+            elif "itag=248" in request.url and not video_url:
+                video_url = request.url
+            elif "itag=137" in request.url and not video_url:
+                video_url = request.url
+            elif "itag=22" in request.url and not video_url:
+                video_url = request.url
+            elif "itag=136" in request.url and not video_url:
+                video_url = request.url
+            elif "itag=135" in request.url and not video_url:
+                    video_url = request.url
+            elif "itag=134" in request.url and not video_url:
+                video_url = request.url
+            elif "itag=133" in request.url and not video_url:
+                video_url = request.url
+            elif "itag=160" in request.url and not video_url:
+                video_url = request.url
+            #####
+            elif "itag=141" in request.url and not audio_url:
+                audio_url = request.url
+            elif "itag=140" in request.url and not audio_url:
+                audio_url = request.url
+            elif "itag=139" in request.url and not audio_url:
+                audio_url = request.url
+
+            if video_url and audio_url:
+                cookies_list = driver.get_cookies()
+                cookies = {cookie['name']: cookie['value'] for cookie in cookies_list}
+                headers = dict(request.headers)
+                return video_url, audio_url, headers, cookies
+        time.sleep(1)
+
+    print("❌ Tüm medya akışları bulunamadı.")
+    return video_url, audio_url, headers, cookies
+
+    """# En kaliteli video ve sesi seç
+    best_video = min(video_candidates, key=lambda x: ITAG_QUALITY_PRIORITY.get(x[0], 9999))
+    best_audio = min(audio_candidates, key=lambda x: ITAG_QUALITY_PRIORITY.get(x[0], 9999))
+
 
     video_url = best_video[1].url
     audio_url = best_audio[1].url
@@ -229,7 +277,7 @@ def wait_for_media_requests(driver, timeout=50):
     print(f"🎯 Seçilen video itag: {get_itag_from_url(video_url)}")
     print(f"🎯 Seçilen ses itag: {get_itag_from_url(audio_url)}")
 
-    return video_url, audio_url, headers, cookies
+    return video_url, audio_url, headers, cookies"""
 
 import subprocess
 
