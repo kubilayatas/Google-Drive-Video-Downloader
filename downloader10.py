@@ -48,7 +48,7 @@ from tqdm import tqdm
 def download_video(video_url, headers, cookies, filename):
     if os.path.exists(filename):
         print(f"✅ Zaten var, atlanıyor: {filename}")
-        return
+        return "OK"
 
     print(f"⬇️ İndiriliyor: {filename}")
     session = requests.Session()
@@ -318,7 +318,7 @@ def restart_driver(driver=None):
         except:
             pass
     os.system("taskkill /f /im chromedriver.exe")
-    os.system("taskkill /f /im chrome.exe")
+    #os.system("taskkill /f /im chrome.exe")
     time.sleep(2)
     return setup_driver()
 
@@ -392,33 +392,14 @@ def main():
             print(f"✅ Zaten birleştirilmiş: {output_path}, atlanıyor.")
             continue
         # Video ve ses bağlantılarını yakala
-        video_url, audio_url, headers, cookies = wait_for_media_requests(driver)
+        #video_url, audio_url, headers, cookies = wait_for_media_requests(driver)
         if not video_url or not audio_url:
-            print("⚠️ Video ya da ses akışı eksik, atlanıyor.")
-            continue
-
-        # Eksik olan dosyaları indir
-        MAX_RETRIES = 3
-        
-        for attempt in range(MAX_RETRIES):
-            result = download_video(video_url, headers, cookies, video_path)
-            if result == "OK":
-                break
-            else:
-                driver = restart_driver(driver)
-                time.sleep(5)
-                
-        for attempt in range(MAX_RETRIES):
-            result = download_video(audio_url, headers, cookies, audio_path)
-            if result == "OK":
-                break
-            else:
-                driver = restart_driver(driver)
-                time.sleep(5)
-            
-
-        # Birleştirme
-        birlestir_ses_goruntu(video_path, audio_path, output_path)
+            print("⚠️ Video ya da ses akışı bulunamadı.")
+                    
+        result1 = download_video(video_url, headers, cookies, video_path)
+        result2 = download_video(audio_url, headers, cookies, audio_path)
+        if result1 == "OK" and result2 == "OK":
+            birlestir_ses_goruntu(video_path, audio_path, output_path)
             
 
     driver.quit()
