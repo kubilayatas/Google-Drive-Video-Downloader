@@ -508,15 +508,16 @@ VIDEO_LINKS_Part32 = ["https://drive.google.com/file/d/1ATfkvlgTL7izc7nMNx5JNv93
 "https://drive.google.com/file/d/1jXlicATlOvhO9r3_TLaZPZAKqpHBvCya/view",
 "https://drive.google.com/file/d/1e6NG-r9eYW6JBRLwUCJrvYVh2iMzjR5D/view",
 "https://drive.google.com/file/d/1p4rqmw1mr3Vf8yEip-Mb31VcWPCbr-sJ/view"]
-VIDEO_LINKS_Part33 = ["https://drive.google.com/file/d/1O-ao7FdsFgjhMU69tcm7XUz3K5c_zp5P/view",
+#VIDEO_LINKS_Part33 = [#"https://drive.google.com/file/d/1O-ao7FdsFgjhMU69tcm7XUz3K5c_zp5P/view",
 #"https://drive.google.com/file/d/1ilAoV9hNLPW67XaIHXckvYh1T8J-yyWk/view",
 #"https://drive.google.com/file/d/1tvvhF6gfK3ecmw45joauJM9Qu5IQapOe/view",
-"https://drive.google.com/file/d/19Qn8i8n-zIeo3XoPGcOXPNU7i6mNKWmH/view",
-"https://drive.google.com/file/d/11DQOQ7REEmvna4PAhhEvcTivrzk9Dzsm/view",
+#"https://drive.google.com/file/d/19Qn8i8n-zIeo3XoPGcOXPNU7i6mNKWmH/view",
+#"https://drive.google.com/file/d/11DQOQ7REEmvna4PAhhEvcTivrzk9Dzsm/view",
 #"https://drive.google.com/file/d/1V7uodtfUPuqrxdzoAbRr1mHe-lEDG5Q8/view",
-"https://drive.google.com/file/d/1gWT0RM7atLCeLGWY7LiFl_k1mAnMvtod/view",
-"https://drive.google.com/file/d/1S7ylHqAsDHs7_L2BO5lskqrTTI4WkJan/view",
-"https://drive.google.com/file/d/1e9CsvKFcy4X9a7LyawxHVdc2kIMT4OFf/view",
-"https://drive.google.com/file/d/1C2tNroj-Q4G2M-qz-FIXyEkeHUrCQaEt/view",
-"https://drive.google.com/file/d/1sO49MlVC_Uv3gfXsid6Ph3NvM7vT85Gr/view",
-"https://drive.google.com/file/d/1tFzBSoqvWMM7TH6EEV58kOuKsRHGaDxV/view"]
+#"https://drive.google.com/file/d/1gWT0RM7atLCeLGWY7LiFl_k1mAnMvtod/view",
+#"https://drive.google.com/file/d/1S7ylHqAsDHs7_L2BO5lskqrTTI4WkJan/view",
+#"https://drive.google.com/file/d/1e9CsvKFcy4X9a7LyawxHVdc2kIMT4OFf/view",
+#"https://drive.google.com/file/d/1C2tNroj-Q4G2M-qz-FIXyEkeHUrCQaEt/view",
+#"https://drive.google.com/file/d/1sO49MlVC_Uv3gfXsid6Ph3NvM7vT85Gr/view",
+#"https://drive.google.com/file/d/1tFzBSoqvWMM7TH6EEV58kOuKsRHGaDxV/view"
+#]

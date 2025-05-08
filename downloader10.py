@@ -12,9 +12,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-from video_link_list import VIDEO_LINKS_Part33 as VIDEO_LINKS
+from video_link_list import VIDEO_LINKS_Part32 as VIDEO_LINKS
 # === AYARLAR ===
 #VIDEO_LINKS = [
+
 #    "https://drive.google.com/file/d/1eUiQwGdoh_vHDjhQsZPfnuHMldSEDwgR/view"
 #]
 PROFILE_DIR = "./chrome-profile"
@@ -24,6 +25,7 @@ OUTPUT_CSV = "media_links.csv"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 USE_SAVED_PROFILE = os.path.exists(FLAG_FILE)
+#USE_SAVED_PROFILE = False
 
 # === ARAÇ FONKSİYONLARI ===
 
@@ -122,6 +124,7 @@ def setup_driver():
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--start-maximized")
     #options.add_argument("--autoplay-policy=no-user-gesture-required")
 
     #options.add_argument("--window-size=300,600")
@@ -134,6 +137,8 @@ def setup_driver():
 
 def wait_for_login(driver, timeout=120):
     print("🔐 Elle giriş yapmanız bekleniyor...")
+    time.sleep(10)
+    subprocess.Popen(r"C:\Users\kubil\OneDrive\Belgeler\GitHub\Google-Drive-Video-Downloader\autoClick\email.exe")
     WebDriverWait(driver, timeout).until(
         lambda d: (
             "accounts.google.com" not in d.current_url.lower()
@@ -380,7 +385,7 @@ def main():
         time.sleep(2)
         click_play_button(driver)
         #wait_for_video_started(driver)
-        time.sleep(5)
+        time.sleep(10)
         video_url, audio_url, headers, cookies = wait_for_media_requests(driver)
         title = extract_title(driver)
         base_filename = os.path.join(OUTPUT_DIR, f"{title}")
@@ -395,12 +400,12 @@ def main():
         #video_url, audio_url, headers, cookies = wait_for_media_requests(driver)
         if not video_url or not audio_url:
             print("⚠️ Video ya da ses akışı bulunamadı.")
-                    
-        result1 = download_video(video_url, headers, cookies, video_path)
-        result2 = download_video(audio_url, headers, cookies, audio_path)
-        if result1 == "OK" and result2 == "OK":
-            birlestir_ses_goruntu(video_path, audio_path, output_path)
-            
+        else:
+            result1 = download_video(video_url, headers, cookies, video_path)
+            result2 = download_video(audio_url, headers, cookies, audio_path)
+            if result1 == "OK" and result2 == "OK":
+                birlestir_ses_goruntu(video_path, audio_path, output_path)
+        safe_rmtree(FLAG_FILE)
 
     driver.quit()
     
